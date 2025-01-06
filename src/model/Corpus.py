@@ -1,7 +1,6 @@
 # Correction de G. Poux-Médard, 2021-2022
 
 from model.Author import Author
-
 # =============== 2.7 : CLASSE CORPUS ===============
 class Corpus:
     def __init__(self, nom):
@@ -38,6 +37,23 @@ class Corpus:
 
         return "\n".join(list(map(str, docs)))
 
+
+class SingletonCorpus(Corpus):
+    _instance = None
+
+    @staticmethod
+    def get_instance(nom="DefaultCorpus"):
+        if SingletonCorpus._instance is None:
+            SingletonCorpus._instance = SingletonCorpus(nom)
+        return SingletonCorpus._instance
+
+    def __init__(self, nom):
+        if SingletonCorpus._instance is not None:
+            raise Exception("This class is a singleton!")
+        super().__init__(nom)
+
+    def search(self, keyword):
+        return super().search(keyword)
 
 
 

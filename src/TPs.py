@@ -136,8 +136,8 @@ for doc in collection:
 
 
 # =============== 2.7, 2.8 : CORPUS ===============
-from model.Corpus import Corpus
-corpus = Corpus("Mon corpus")
+from model.Corpus import SingletonCorpus
+corpus = SingletonCorpus("Mon corpus")
 
 # Construction du corpus à partir des documents
 for doc in collection:
