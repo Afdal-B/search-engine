@@ -136,8 +136,8 @@ for doc in collection:
 
 
 # =============== 2.7, 2.8 : CORPUS ===============
-from model.Corpus import SingletonCorpus
-corpus = SingletonCorpus("Mon corpus")
+from model.Corpus import Corpus
+corpus = Corpus("Mon corpus")
 
 # Construction du corpus à partir des documents
 for doc in collection:
@@ -147,21 +147,31 @@ for doc in collection:
 
 
 # =============== 2.9 : SAUVEGARDE ===============
-import pickle
+'''import pickle
 
 # Ouverture d'un fichier, puis écriture avec pickle
 with open("corpus/corpus.pkl", "wb") as f:
-    pickle.dump(corpus, f)
+    pickle.dump(corpus, f)'''
 
 # Supression de la variable "corpus"
-del corpus
+#del corpus
 
 # Ouverture du fichier, puis lecture avec pickle
-with open("corpus/corpus.pkl", "rb") as f:
-    corpus = pickle.load(f)
+"""with open("corpus/corpus.pkl", "rb") as f:
+    corpus = pickle.load(f)"""
 
 # La variable est réapparue
-print(corpus)
+#print("=========CORPUS==========")
+#print(corpus)
+if __name__ == "__main__":
+    print("UTILISATION DE LA METHODE CONCORDE\n")
+    print(corpus.concorde("the",5))
+    print("UTILISATION DE LA METHODE STATS\n")
+    print(corpus.stats(n=5))
+    print("UTILISATION DE LA METHODE GENERERFREQ\n")
+    print(corpus.genererFreq())
+
+
 
 
 
