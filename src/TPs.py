@@ -3,7 +3,7 @@
 # =============== 1.1 : REDDIT ===============
 # Library
 import praw
-
+from model.Document import ArxivDocument,RedditDocument
 # Fonction affichage hiérarchie dict
 def showDictStruct(d):
     def recursivePrint(d, i):
@@ -80,7 +80,7 @@ longueChaineDeCaracteres = " ".join(docs)
 
 # =============== PARTIE 2 =============
 # =============== 2.1, 2.2 : CLASSE DOCUMENT ===============
-from Classes import Document
+from model.Document import Document
 
 # =============== 2.3 : MANIPS ===============
 import datetime
@@ -97,7 +97,7 @@ for nature, doc in docs_bruts:
         summary = doc["summary"].replace("\n", "")  # On enlève les retours à la ligne
         date = datetime.datetime.strptime(doc["published"], "%Y-%m-%dT%H:%M:%SZ").strftime("%Y/%m/%d")  # Formatage de la date en année/mois/jour avec librairie datetime
 
-        doc_classe = Document(titre, authors, date, doc["id"], summary)  # Création du Document
+        doc_classe = ArxivDocument(titre, authors, date, doc["id"], summary)  # Création du Document
         collection.append(doc_classe)  # Ajout du Document à la liste.
 
     elif nature == "Reddit":
@@ -108,7 +108,7 @@ for nature, doc in docs_bruts:
         url = "https://www.reddit.com/"+doc.permalink
         texte = doc.selftext.replace("\n", "")
 
-        doc_classe = Document(titre, auteur, date, url, texte)
+        doc_classe = RedditDocument(titre, auteur, date, url, texte)
 
         collection.append(doc_classe)
 
@@ -118,7 +118,7 @@ for i, doc in enumerate(collection):
     id2doc[i] = doc.titre
 
 # =============== 2.4, 2.5 : CLASSE AUTEURS ===============
-from Classes import Author
+from model.Author import Author
 
 # =============== 2.6 : DICT AUTEURS ===============
 authors = {}
@@ -136,7 +136,7 @@ for doc in collection:
 
 
 # =============== 2.7, 2.8 : CORPUS ===============
-from Corpus import Corpus
+from model.Corpus import Corpus
 corpus = Corpus("Mon corpus")
 
 # Construction du corpus à partir des documents
@@ -162,6 +162,7 @@ with open("corpus/corpus.pkl", "rb") as f:
 
 # La variable est réapparue
 print(corpus)
+
 
 
 

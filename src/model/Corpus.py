@@ -1,6 +1,6 @@
 # Correction de G. Poux-Médard, 2021-2022
 
-from Classes import Author
+from model.Author import Author
 
 # =============== 2.7 : CLASSE CORPUS ===============
 class Corpus:
