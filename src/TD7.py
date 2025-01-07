@@ -29,7 +29,7 @@ def compute_tf(doc, vocab):
     for word in doc_words:  # Pour chaque mot dans le document
         if word in vocab:  # Si le mot est dans le vocabulaire
             tf[vocab[word]["id"]] += 1  # Incrémente le compteur pour ce mot
-    return tf / len(doc_words)  # Normalise en divisant par le nombre total de mots
+    return tf / len(doc_words) if len(doc_words) > 0 else tf  # Normalise en divisant par le nombre total de mots
 
 
 def compute_idf(corpus, vocab):
@@ -75,8 +75,8 @@ compute_idf(corpus.id2doc, vocab)
 # Calcul de la matrice TF-IDF
 mat_TF_IDF = compute_tfidf(corpus.id2doc, vocab)
 
-print(f"Matrice TF-IDF: {mat_TF_IDF[0].shape}")
-print(f"Matrice TF-IDF: {mat_TF_IDF}")
+print(f"Matrice TF-IDF: {mat_TF_IDF.data}")
+#print(f"Matrice TF-IDF: {mat_TF_IDF}")
 
 # == Partie 2 : Moteur de recherche
 
@@ -117,8 +117,14 @@ for i in range(mat_TF_IDF.shape[0]):
     #print(f"Document ID: {i}, Similarité: {similarities[i]}")
 print(similarities)
 
-# Trier et afficher les meilleurs résultats
-# sorted_indices = np.argsort(similarities.flatten())[::-1]
-# top_n = 5  # Nombre de résultats à afficher
-# for idx in sorted_indices[:top_n]:
-#     print(f"Document ID: {idx}, Similarité: {similarities[0, idx]}")
+# Aplatir pour obtenir un vecteur 1D
+flat_array = similarities.flatten()
+
+# Supprimer les NaN (ou les gérer selon le besoin)
+clean_array = flat_array[~np.isnan(flat_array)]
+
+# Obtenir les indices des valeurs triées par ordre décroissant
+sorted_indices = np.argsort(clean_array)[::-1]
+
+print("Indices des valeurs triées par ordre décroissant :")
+print(sorted_indices)
