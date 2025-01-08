@@ -3,7 +3,7 @@
 # =============== 2.1 : La classe Document ===============
 class Document:
     # Initialisation des variables de la classe
-    def __init__(self, titre="", auteur="", date="", url="", texte="",type=""):
+    def __init__(self, titre="", auteur="", date="", url="", texte="", type=""):
         self.titre = titre
         self.auteur = auteur
         self.date = date
@@ -11,7 +11,7 @@ class Document:
         self.texte = texte
         self.type = type
 
-# =============== 2.2 : REPRESENTATIONS ===============
+    # =============== 2.2 : REPRESENTATIONS ===============
     # Fonction qui renvoie le texte à afficher lorsqu'on tape repr(classe)
     def __repr__(self):
         return f"Titre : {self.titre}\tAuteur : {self.auteur}\tDate : {self.date}\tURL : {self.url}\tTexte : {self.texte}\t"
@@ -39,7 +39,8 @@ class RedditDocument(Document):
     def getType(self):
         return str(self.type).upper()
 
-#---------- 
+
+# ----------
 class ArxivDocument(Document):
     def __init__(self, titre, auteur, date, url, texte):
         type = "arxiv"
@@ -69,4 +70,3 @@ class DocumentFactory:
             return ArxivDocument(**kwargs)
         else:
             raise ValueError("Unknown document type")
-
