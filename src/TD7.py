@@ -1,11 +1,14 @@
 import math
+
 import numpy as np
 from scipy.sparse import csr_matrix
-from numpy import nan
 
-from TD3_6 import corpus
+from model.SearchEngine import SearchEngine
+from TD3_6 import load_corpus
 
 # == Partie 1 : Construction de la matrice Documents x Mots
+
+corpus = load_corpus()
 
 
 def build_vocab(corpus):
@@ -29,7 +32,9 @@ def compute_tf(doc, vocab):
     for word in doc_words:  # Pour chaque mot dans le document
         if word in vocab:  # Si le mot est dans le vocabulaire
             tf[vocab[word]["id"]] += 1  # Incrémente le compteur pour ce mot
-    return tf / len(doc_words) if len(doc_words) > 0 else tf  # Normalise en divisant par le nombre total de mots
+    return (
+        tf / len(doc_words) if len(doc_words) > 0 else tf
+    )  # Normalise en divisant par le nombre total de mots
 
 
 def compute_idf(corpus, vocab):
@@ -76,7 +81,6 @@ compute_idf(corpus.id2doc, vocab)
 mat_TF_IDF = compute_tfidf(corpus.id2doc, vocab)
 
 print(f"Matrice TF-IDF: {mat_TF_IDF.data}")
-#print(f"Matrice TF-IDF: {mat_TF_IDF}")
 
 # == Partie 2 : Moteur de recherche
 
@@ -85,15 +89,9 @@ def cosine_similarity(vec1, vec2):
     """Calcule la similarité cosinus entre un vecteur dense et une matrice creuse."""
     vec1 = np.ravel(vec1)
     vec2 = np.ravel(vec2)
-    print("Vecteur 1",vec1)
-    print("Vecteur 2",vec2)
     dot_product = vec2.dot(vec1)
-  
-    print("dot_product", dot_product)
     norm1 = np.linalg.norm(vec1)
     norm2 = np.linalg.norm(vec2)
-    # print("norm1", norm1)
-    # print("norm2", norm2)
     if norm1 != 0:
         return dot_product / (norm1 * norm2)
     return 0
@@ -108,14 +106,13 @@ for word in query:
     if word in vocab:
         word_id = vocab[word]["id"]
         query_vector[0, word_id] += 1
-#print("Vecteur requête:", query_vector.shape)
+
 # Calculer la similarité cosinus entre la requête et tous les documents
-#print("Premier doc",mat_TF_IDF[0])
-similarities = np.zeros((mat_TF_IDF.shape[0],1))
+similarities = np.zeros((mat_TF_IDF.shape[0], 1))
 for i in range(mat_TF_IDF.shape[0]):
-    similarities[i] = cosine_similarity(query_vector, np.ravel((mat_TF_IDF.toarray())[i]))
-    #print(f"Document ID: {i}, Similarité: {similarities[i]}")
-print(similarities)
+    similarities[i] = cosine_similarity(
+        query_vector, np.ravel((mat_TF_IDF.toarray())[i])
+    )
 
 # Aplatir pour obtenir un vecteur 1D
 flat_array = similarities.flatten()
@@ -126,5 +123,16 @@ clean_array = flat_array[~np.isnan(flat_array)]
 # Obtenir les indices des valeurs triées par ordre décroissant
 sorted_indices = np.argsort(clean_array)[::-1]
 
-print("Indices des valeurs triées par ordre décroissant :")
-print(sorted_indices)
+print("Valeurs triées par ordre décroissant :")
+top_k = 5
+for idx in sorted_indices[:top_k]:
+    print({"Document ID": idx, "Similarity": clean_array[idx]})
+
+
+# === Exemple d'utilisation avec la classe SearchEngine
+print("\n ============> Utilisation de la classe SearchEngine:")
+search_engine = SearchEngine(corpus)
+query = input("Entrez quelques mots-clefs: ")
+results = search_engine.search(query)
+print("Meilleurs résultats :")
+print(results)
