@@ -3,6 +3,7 @@ import math
 import numpy as np
 from scipy.sparse import csr_matrix
 
+from model.SearchEngine import SearchEngine
 from TD3_6 import load_corpus
 
 # == Partie 1 : Construction de la matrice Documents x Mots
@@ -126,3 +127,12 @@ print("Valeurs triées par ordre décroissant :")
 top_k = 5
 for idx in sorted_indices[:top_k]:
     print({"Document ID": idx, "Similarity": clean_array[idx]})
+
+
+# === Exemple d'utilisation avec la classe SearchEngine
+print("\n ============> Utilisation de la classe SearchEngine:")
+search_engine = SearchEngine(corpus)
+query = input("Entrez quelques mots-clefs: ")
+results = search_engine.search(query)
+print("Meilleurs résultats :")
+print(results)
