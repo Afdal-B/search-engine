@@ -151,35 +151,35 @@ def load_corpus(filename="corpus/corpus.pkl"):
 
 
 def main():
-    # Fetch Reddit posts
+    # Récupérer les posts Reddit
     reddit_docs, reddit_docs_bruts = fetch_reddit_posts()
 
-    # Fetch ArXiv documents
+    # Récupérer les documents ArXiv
     query_terms = ["clustering", "Dirichlet"]
     arxiv_docs, arxiv_docs_bruts = fetch_arxiv_docs(query_terms)
 
-    # Combine documents
+    # Combiner les documents
     docs = reddit_docs + arxiv_docs
     docs_bruts = reddit_docs_bruts + arxiv_docs_bruts
 
-    # Process documents
+    # Traiter les documents
     docs, docs_bruts = process_documents(docs, docs_bruts)
 
-    # Create collection
+    # Créer la collection
     collection = create_collection(docs_bruts)
 
-    # Create author dictionary
+    # Créer le dictionnaire des auteurs
     authors, aut2id = create_author_dict(collection)
 
-    # Create corpus
+    # Créer le corpus
     corpus = Corpus("Mon corpus")
     for doc in collection:
         corpus.add(doc)
 
-    # Save corpus
+    # Sauvegarder le corpus
     save_corpus(corpus)
 
-    # Load corpus
+    # Charger le corpus
     corpus_f = load_corpus()
 
     print("=========CORPUS-File==========")
