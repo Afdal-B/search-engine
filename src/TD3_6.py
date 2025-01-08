@@ -107,7 +107,7 @@ def create_collection(docs_bruts):
             date = datetime.datetime.strptime(
                 doc["published"], "%Y-%m-%dT%H:%M:%SZ"
             ).strftime("%Y/%m/%d")
-
+            #print("SUMMARY", summary)
             doc_classe = ArxivDocument(titre, authors, date, doc["id"], summary)
             collection.append(doc_classe)
 
@@ -117,7 +117,7 @@ def create_collection(docs_bruts):
             date = datetime.datetime.fromtimestamp(doc.created).strftime("%Y/%m/%d")
             url = "https://www.reddit.com/" + doc.permalink
             texte = doc.selftext.replace("\n", "")
-
+            print("TEXTE",texte)
             doc_classe = RedditDocument(titre, auteur, date, url, texte)
             collection.append(doc_classe)
 
@@ -155,7 +155,7 @@ def main():
     reddit_docs, reddit_docs_bruts = fetch_reddit_posts()
 
     # Récupérer les documents ArXiv
-    query_terms = ["clustering", "Dirichlet"]
+    query_terms = ["coronavirus"]
     arxiv_docs, arxiv_docs_bruts = fetch_arxiv_docs(query_terms)
 
     # Combiner les documents

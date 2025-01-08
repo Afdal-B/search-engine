@@ -127,6 +127,7 @@ print("Valeurs triées par ordre décroissant :")
 top_k = 5
 for idx in sorted_indices[:top_k]:
     print({"Document ID": idx, "Similarity": clean_array[idx]})
+    print("D++++++", corpus.id2doc[idx])
 
 
 # === Exemple d'utilisation avec la classe SearchEngine

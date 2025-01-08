@@ -86,6 +86,7 @@ class SearchEngine:
 
         results = []
         for idx in sorted_indices[:top_k]:
-            results.append({"Document ID": idx, "Similarity": clean_array[idx]})
+            #results.append({"Document ID": idx, "Similarity": clean_array[idx]})
+            results.append(self.corpus.id2doc[idx])
 
-        return pd.DataFrame(results)
+        return results
