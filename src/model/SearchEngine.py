@@ -2,8 +2,8 @@ import numpy as np
 import pandas as pd
 from scipy.sparse import csr_matrix
 
-from model.Corpus import Corpus
-from model.Document import Document
+from Corpus import Corpus
+from Document import Document
 
 
 class SearchEngine:
