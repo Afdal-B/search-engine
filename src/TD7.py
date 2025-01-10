@@ -1,7 +1,7 @@
 import math
 import numpy as np
 from scipy.sparse import csr_matrix
-from model.SearchEngine import SearchEngine
+from SearchEngine import SearchEngine
 from TD3_6 import load_corpus
 
 # == Partie 1 : Construction de la matrice Documents x Mots
