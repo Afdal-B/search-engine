@@ -6,9 +6,9 @@ Ce projet implémente un moteur de recherche qui manipule et analyse un corpus d
 
 ## Fonctionnalités principales
 
--> Gestion de corpus : Importation, exportation et traitement des documents.
--> Moteur de recherche : Recherche avancée dans le corpus basé sur différents critères.
--> Analyse de documents : Gestion des métadonnées et traitement des contenus.
+- Gestion de corpus : Importation, exportation et traitement des documents.
+- Moteur de recherche : Recherche avancée dans le corpus basé sur différents critères.
+- Analyse de documents : Gestion des métadonnées et traitement des contenus.
 
 ## Arborescence du projet
 
