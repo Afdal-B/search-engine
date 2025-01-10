@@ -182,5 +182,13 @@ def main():
     print("====== CORPUS CHARGÉ ======")
     print(corpus_f)
 
+    # Utilisation des méthodes de la classe Corpus
+    print("UTILISATION DE LA METHODE CONCORDE\n")
+    print(corpus_f.concorde("the", 5))
+    print("UTILISATION DE LA METHODE STATS\n")
+    print(corpus_f.stats(n=5))
+    print("UTILISATION DE LA METHODE GENERERFREQ\n")
+    print(corpus_f.genererFreq())
+
 if __name__ == "__main__":
     main()
