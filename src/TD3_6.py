@@ -10,9 +10,9 @@ import urllib.request
 import praw
 import xmltodict
 
-from model.Author import Author
-from model.Corpus import Corpus
-from model.Document import ArxivDocument, RedditDocument
+from Author import Author
+from Corpus import Corpus
+from Document import ArxivDocument, RedditDocument
 
 
 # Fonction affichage hiérarchie dict
