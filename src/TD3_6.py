@@ -10,9 +10,9 @@ import urllib.request
 import praw
 import xmltodict
 
-from Author import Author
-from Corpus import Corpus
-from Document import ArxivDocument, RedditDocument
+from model.Author import Author
+from model.Corpus import Corpus
+from model.Document import ArxivDocument, RedditDocument
 
 
 # Fonction affichage hiérarchie dict
@@ -61,7 +61,7 @@ def fetch_reddit_posts(limit=100):
 
 def fetch_arxiv_docs(query_terms, max_results=50):
     # Requête
-    url = f'http://export.arxiv.org/api/query?search_query=all:{"+".join(query_terms)}&start=0&max_results={max_results}'
+    url = f"http://export.arxiv.org/api/query?search_query=all:{'+'.join(query_terms)}&start=0&max_results={max_results}"
     data = urllib.request.urlopen(url)
 
     # Format dict (OrderedDict)
@@ -107,7 +107,7 @@ def create_collection(docs_bruts):
             date = datetime.datetime.strptime(
                 doc["published"], "%Y-%m-%dT%H:%M:%SZ"
             ).strftime("%Y/%m/%d")
-            #print("SUMMARY", summary)
+            # print("SUMMARY", summary)
             doc_classe = ArxivDocument(titre, authors, date, doc["id"], summary)
             collection.append(doc_classe)
 
@@ -117,7 +117,7 @@ def create_collection(docs_bruts):
             date = datetime.datetime.fromtimestamp(doc.created).strftime("%Y/%m/%d")
             url = "https://www.reddit.com/" + doc.permalink
             texte = doc.selftext.replace("\n", "")
-            print("TEXTE",texte)
+            print("TEXTE", texte)
             doc_classe = RedditDocument(titre, auteur, date, url, texte)
             collection.append(doc_classe)
 
