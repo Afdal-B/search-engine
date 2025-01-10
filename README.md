@@ -20,7 +20,7 @@ SEARCH-ENGINE/
 │ ├── out.pkl # Fichier de sortie (résultats ou corpus traité)
 ├── src/
 │ ├── model/ # Contient les définitions des classes principales
-│ │ ├── **init**.py # Initialisation du module
+│ │ ├── __init__.py # Initialisation du module
 │ │ ├── Author.py # Classe représentant les auteurs
 │ │ ├── Corpus.py # Classe représentant un corpus de documents
 │ │ ├── Document.py # Classe représentant un document
