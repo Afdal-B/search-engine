@@ -1,8 +1,8 @@
 # Correction de G. Poux-Médard, 2021-2022
 import re
 from pandas import DataFrame
-from Author import Author
-from Document import Document
+from model.Author import Author
+from model.Document import Document
 
 # =============== 2.7 : CLASSE CORPUS ===============
 class Corpus:
