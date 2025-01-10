@@ -1,8 +1,8 @@
 import pandas as pd
 import numpy as np
 from scipy.sparse import csr_matrix
-from model.Corpus import Corpus
-from model.Document import Document
+from Corpus import Corpus
+from Document import Document
 class SearchEngine:
     def __init__(self, corpus):
         self.corpus = corpus
