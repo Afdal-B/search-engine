@@ -1,7 +1,7 @@
 import numpy as np
 import pandas as pd
 from scipy.sparse import csr_matrix
-
+from tqdm.notebook import tqdm
 from model.Corpus import Corpus
 from model.Document import Document
 
@@ -71,13 +71,17 @@ class SearchEngine:
         self.compute_tfidf()
         query = query.lower().split()
         query_vector = np.zeros((1, len(self.vocab)))
+        word_found = False
         for word in query:
             if word in self.vocab:
                 word_id = self.vocab[word]["id"]
                 query_vector[0, word_id] += 1
-
+                word_found = True
+        
+        if not word_found:
+            return pd.DataFrame()
         similarities = np.zeros((self.mat_TF_IDF.shape[0], 1))
-        for i in range(self.mat_TF_IDF.shape[0]):
+        for i in tqdm(range(self.mat_TF_IDF.shape[0]), desc="Recherche en cours ..."):
             similarities[i] = self.cosine_similarity(query_vector, (self.mat_TF_IDF.toarray()[i]))
 
         flat_array = similarities.flatten()
