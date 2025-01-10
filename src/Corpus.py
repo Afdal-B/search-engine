@@ -3,8 +3,8 @@ import re
 
 from pandas import DataFrame
 
-from model.Author import Author
-from model.Document import Document
+from Author import Author
+from Document import Document
 
 
 # =============== 2.7 : CLASSE CORPUS ===============
