@@ -15,9 +15,9 @@ Ce projet implémente un moteur de recherche qui manipule et analyse un corpus d
 ```bash
 SEARCH-ENGINE/
 ├── corpus/
-│ ├── corpus.pkl # Fichier contenant le corpus sérialisé
+│ ├── corpus.pkl # Fichier contenant le corpus 
 │ ├── discours_US.csv # Exemple de corpus sous format CSV
-│ ├── out.pkl # Fichier de sortie (résultats ou corpus traité)
+│ ├── corpus2.pkl #Fichier contenant un autre corpus 
 ├── src/
 │ ├── model/ # Contient les définitions des classes principales
 │ │ ├── __init__.py # Initialisation du module
@@ -25,8 +25,8 @@ SEARCH-ENGINE/
 │ │ ├── Corpus.py # Classe représentant un corpus de documents
 │ │ ├── Document.py # Classe représentant un document
 │ │ ├── SearchEngine.py # Classe implémentant le moteur de recherche
-│ ├── TD3_6.py # Script pour les l'exécution des TD 3 à 6
-│ ├── TD7.py # Script pour les l'exécution du TD 7
+│ ├── td_3_4_5.py # Script pour les l'exécution des TD 3 à 6
+│ ├── td_7.py # Script pour les l'exécution du TD 7
 │ ├── td8.ipynb # Notebook principal pour la démonstration
 ├── .gitignore # Liste des fichiers/dossiers ignorés par Git
 ├── LICENSE # Licence du projet
